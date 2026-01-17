@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: echo "This is a test step"
-      # (replace with your real test commands)
+      # replace with your real test commands
 
  container_scanning: 
  runs-on: ubuntu-22.04 
