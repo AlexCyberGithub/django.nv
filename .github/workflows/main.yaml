@@ -1,13 +1,13 @@
-name: Django                                  # workflow name
+name: Django
 
 on:
   push:
-    branches:                                 # similar to "only" in GitLab
+    branches:
       - main
 
 jobs:
   build:
-    runs-on: ubuntu-22.04                    # similar to "image" in GitLab
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
 
@@ -24,7 +24,14 @@ jobs:
           python manage.py check
 
   test:
-     container_scanning:
+    runs-on: ubuntu-22.04
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "This is a test step"
+      # (replace with your real test commands)
+
+  container_scanning:
     runs-on: ubuntu-22.04
     needs: test
     steps:
@@ -49,7 +56,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'MEDIUM' 
+          severity: 'MEDIUM'
 
   integration:
     runs-on: ubuntu-22.04
